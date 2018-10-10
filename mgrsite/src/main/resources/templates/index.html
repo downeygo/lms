@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <div th:include="common"></div>
+
+    <script type="text/javascript" th:src="@{/lms/js/common/bootbox.js}"></script>
+    <script type="text/javascript">
+        console.debug(11);
+        $(function () {
+            bootbox.confirm("1111",function () {
+                
+            });
+            console.debug(22);
+        });
+    </script>
+</head>
+<body>
+index
+</body>
+</html>

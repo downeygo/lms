@@ -1,0 +1,34 @@
+$(function () {
+    //加载权限
+    $(".reload-btn").click(function () {
+        $.ajax({
+            url:'/reload',
+            type:'get',
+            success:function(data){
+                if(data.success){
+                    window.location.reload();
+                }else{
+                    $.messager.popup(data.msg);
+                }
+            }
+        });
+    });
+
+    //删除
+    $(".delete-btn").click(function(){
+        var id = $(this).parent().parent().children(":first-child").val();
+        if(id){
+            $.ajax({
+                url:'/permission/'+id,
+                type:'delete',
+                success:function(data){
+                    if(data.success){
+                        window.location.reload();
+                    }else{
+                        $.messager.popup(data.msg);
+                    }
+                }
+            });
+        }
+    });
+});

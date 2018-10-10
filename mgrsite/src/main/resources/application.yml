@@ -1,0 +1,10 @@
+#后台
+server:
+  port: 8888
+
+#引入core配置文件
+spring:
+  profiles:
+    include: core
+  thymeleaf:
+    cache: false

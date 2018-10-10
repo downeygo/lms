@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>实验室管理系统(LMS)</title>
+
+    <div th:include="common"></div>
+
+    <link th:href="@{/lms/css/signin.css}" rel="stylesheet">
+    <script type="text/javascript">
+        $(function () {
+            $("#form").ajaxForm({
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = "/main";
+                    } else {
+                        $.messager.popup(data.msg);
+                    }
+                }
+            });
+        })
+    </script>
+</head>
+
+<body class="text-center">
+<form class="form-signin" action="/loginTo" method="post" id="form">
+    <img class="mb-4" th:src="@{/lms/img/bootstrap-solid.svg}" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">实验室管理系统(LMS)</h1>
+    <label class="sr-only">用户名</label>
+    <input type="text" class="form-control" name="username" placeholder="用户名" required="" autofocus="">
+    <label class="sr-only">密码</label>
+    <input type="password" class="form-control" name="password" placeholder="密码" required="">
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me">记住我
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">登 录</button>
+    <p class="mt-5 mb-3 text-muted">© 2018-2019</p>
+</form>
+
+</body>
+
+</html>

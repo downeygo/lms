@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>权限信息</title>
+    <div th:include="common"></div>
+    <script type="text/javascript" th:src="@{/lms/js/permission/permission.js}"></script>
+</head>
+<body>
+<div class="table-responsive">
+    <shiro:hasPermission name="permission:reload">
+        <button type="button" class="btn btn-success reload-btn">加载</button>
+    </shiro:hasPermission>
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>权限表达式</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${permission}">
+            <input type="hidden" th:value="${p.id}"/>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.resource}"></td>
+            <td>
+                <shiro:hasPermission name="permission:delete">
+                    <button type="button" class="btn btn-danger delete-btn">删除</button>
+                </shiro:hasPermission>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

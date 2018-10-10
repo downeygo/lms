@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imen.lms.core.mapper.LaboratoryMapper">
+    <resultMap id="BaseResultMap" type="com.imen.lms.core.domain.Laboratory">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="BIGINT"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="establisher_id" property="establisher" jdbcType="BIGINT"/>
+        <result column="size" property="size" jdbcType="BIGINT"/>
+        <result column="openTime" property="openTime" jdbcType="VARCHAR"/>
+        <result column="closeTime" property="closeTime" jdbcType="VARCHAR"/>
+        <result column="establishTime" property="establishTime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT id, name, code, type, location, establisher_id, size, openTime, closeTime, establishTime
+        FROM laboratory
+    </select>
+
+</mapper>

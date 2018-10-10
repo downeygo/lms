@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imen.lms.core.mapper.UserInforMapper">
+    <resultMap id="BaseResultMap" type="com.imen.lms.core.domain.UserInfor">
+        <id column="login_id" property="id" jdbcType="BIGINT"/>
+        <result column="realName" property="realName" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="phoneNumber" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="birth" property="birth" jdbcType="VARCHAR"/>
+        <association property="loginInfor" javaType="com.imen.lms.core.domain.LoginInfor">
+            <result column="username" property="username" jdbcType="VARCHAR"/>
+            <result column="userType" property="userType" jdbcType="BIGINT"/>
+            <result column="state" property="state" jdbcType="BIGINT"/>
+        </association>
+    </resultMap>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT u.login_id, u.realName, u.gender, u.phoneNumber, u.email, u.birth, l.username, l.userType, l.state
+        FROM userInfor u INNER JOIN logininfor l ON u.login_id=l.id
+    </select>
+
+    <insert id="add">
+        INSERT INTO userInfor(
+          login_id,
+          realName,
+          gender,
+          phoneNumber,
+          email,
+          birth
+        )
+        VALUES (
+          #{id},
+          #{realName},
+          #{gender},
+          #{phoneNumber},
+          #{email},
+          #{birth}
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM userInfor
+        WHERE login_id=#{id}
+    </delete>
+
+    <select id="get" resultMap="BaseResultMap">
+        SELECT
+	      u.login_id,
+	      u.realName,
+	      u.gender,
+	      u.phoneNumber,
+	      u.email,
+	      u.birth,
+	      l.username,
+	      l.userType,
+	      l.state
+        FROM
+	      userInfor u
+	    INNER JOIN logininfor l ON u.login_id = l.id
+        WHERE
+	      l.id =#{id}
+    </select>
+</mapper>

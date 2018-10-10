@@ -1,0 +1,15 @@
+#druid数据源
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql:///lms?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: admin
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.imen.lms.core.domain
+  config-location: classpath:mybatis.cfg.xml
+

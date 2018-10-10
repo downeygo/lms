@@ -1,0 +1,74 @@
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>实验室管理系统(LMS)</title>
+    <!-- 引入公共的JS、CSS -->
+    <div th:include="common"></div>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">实验室管理系统</a>
+
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+                用户名：<shiro:principal/>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">个人信息</a>
+                <a class="dropdown-item" href="#">修改密码</a>
+                <a class="dropdown-item" href="#">退出</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/logout}">注销</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-md-block bg-light">
+                <ul id="leftMenu" class="nav flex-column ">
+                    <shiro:hasPermission name="laboratory:list">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" data-url="laboratory">
+                            实验室
+                        </a>
+                    </li>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="user:list">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" data-url="user">
+                            用户
+                        </a>
+                    </li>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="role:list">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" data-url="/role">
+                            角色
+                        </a>
+                    </li>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="permission:list">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" data-url="permission">
+                            权限
+                        </a>
+                    </li>
+                    </shiro:hasPermission>
+                </ul>
+        </nav>
+        <main class="col-md-10 ml-sm-auto col-lg-10">
+            <iframe name="right" id="rightMain" th:src="@{/index}" frameborder="no" scrolling="auto" width="100%" height="600" allowtransparency="true"/>
+        </main>
+    </div>
+</div>
+</body>
+</html>
