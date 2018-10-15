@@ -4,6 +4,9 @@ import com.imen.lms.core.domain.LoginInfor;
 import com.imen.lms.core.domain.Permission;
 import com.imen.lms.core.domain.Role;
 import com.imen.lms.core.domain.UserInfor;
+import com.imen.lms.core.page.BaseQuery;
+import com.imen.lms.core.page.PageResult;
+import com.imen.lms.core.page.UserInforQuery;
 import com.imen.lms.core.service.IRoleService;
 import com.imen.lms.core.service.IUserInforService;
 import com.imen.lms.core.util.JSONResult;
@@ -29,13 +32,22 @@ public class UserInforController {
     private IUserInforService userInforService;
     @Autowired
     private IRoleService roleService;
+    //@Autowired
+    //private UserInforQuery userInforQuery;
+
 
     @GetMapping("/user")
     @RequiresPermissions("user:list")
     @PermissionName("用户列表")
-    public String list(Model m) {
-        m.addAttribute("user", userInforService.selectAll());
-        return "user/list";
+    public String list(Model m, UserInforQuery uq) {
+        try {
+            PageResult<UserInfor> page = userInforService.query(uq,uq.getCurrentPage(),uq.getPageSize());
+            m.addAttribute("page", page);
+            System.out.println(page.getLastPage());
+            return "user/list";
+        } catch (Exception e) {
+            return "error/500";
+        }
     }
 
     @PostMapping("/user")
@@ -66,7 +78,7 @@ public class UserInforController {
         JSONResult jsonResult = null;
         try {
             Integer[] roleID = StringUtil.stringToIntArr(ids);
-            userInforService.update(loginInfor,roleID);
+            userInforService.update(loginInfor, roleID);
             jsonResult = new JSONResult(true, "修改成功");
         } catch (Exception e) {
             jsonResult = new JSONResult("修改失败");
@@ -117,6 +129,15 @@ public class UserInforController {
             jsonResult = new JSONResult(e.getMessage());
         }
         return jsonResult;
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public PageResult<UserInfor> get(UserInforQuery uq) {
+        uq.setPageSize(2);
+        System.out.println(uq.getCurrentPage());
+        PageResult<UserInfor> query = userInforService.query(uq,uq.getCurrentPage(),uq.getPageSize());
+        return query;
     }
 
 }

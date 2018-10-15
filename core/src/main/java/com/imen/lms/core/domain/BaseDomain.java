@@ -3,6 +3,7 @@ package com.imen.lms.core.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 /**
  * @autor LIGANG

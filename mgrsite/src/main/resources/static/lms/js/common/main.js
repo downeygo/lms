@@ -1,15 +1,15 @@
 $(function () {
-    $("#leftMenu li a").click(function () {
+    //按钮变小
+    $(".btn").addClass("btn-sm");
+
+    //菜单点击时间
+    $("a").click(function () {
         var url = $(this).data("url");
         if (url) {
-            $("#rightMain").prop("src", url);
+            $("#iframe").prop("src", url);
         }
     });
 });
 
-/**
- * 清空表单
- */
-function clearForm(form) {
-    $("#"+form).clearForm();
-}
+
+

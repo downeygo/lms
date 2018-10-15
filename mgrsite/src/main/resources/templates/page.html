@@ -1,0 +1,45 @@
+<ul class="pagination justify-content-center">
+    <li name="firstPage" class="page-item text-primary">
+        <a class="page-link">总记录数：[[${page.totalCount}]]</a>
+    </li>
+    <li name="firstPage" class="page-item text-primary" th:value="${page.firstPage}">
+        <a class="page-link">首页</a>
+    </li>
+    <li name="prevPage" class="page-item text-primary" th:value="${page.prevPage}">
+        <a class="page-link">上一页</a>
+    </li>
+    <li name="nextPage" class="page-item text-primary" th:value="${page.nextPage}">
+        <a class="page-link">下一页</a>
+    </li>
+    <li name="lastPage" class="page-item text-primary" th:value="${page.lastPage}">
+        <a class="page-link">最后一页</a>
+    </li>
+    <li name="lastPage" class="page-item text-primary">
+        <a class="page-link">当前第：[[${page.currentPage}]] / [[${page.totalPage}]]页</a>
+    </li>
+</ul>
+<script type="text/javascript">
+    $(function () {
+        var currentPage = [[${page.currentPage}]];
+        var page = $(".pagination li");
+        $.map(page, function (item) {
+            if (currentPage == item.value) {
+                $(item).addClass("disabled");
+            }
+        });
+
+        $(".page-item").click(function () {
+            var disabled = $(this).hasClass("disabled");
+            if (!disabled) {
+                var currentPage = $(this).val();
+                var url = $("div[name=page]").data("url");
+
+                if (currentPage && url) {
+                    url = url + '?currentPage=' + currentPage;
+                    //获取父窗口分iframe
+                    window.parent.$("#iframe").prop("src", url);
+                }
+            }
+        });
+    });
+</script>

@@ -6,6 +6,7 @@ import com.imen.lms.core.domain.UserInfor;
 import com.imen.lms.core.mapper.LoginInforMapper;
 import com.imen.lms.core.mapper.RoleMapper;
 import com.imen.lms.core.mapper.UserInforMapper;
+import com.imen.lms.core.page.UserInforQuery;
 import com.imen.lms.core.service.IUserInforService;
 import com.imen.lms.core.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class UserInforServiceImpl implements IUserInforService {
+public class UserInforServiceImpl extends BaseServiceImpl<UserInfor,UserInforQuery> implements IUserInforService {
 
     @Autowired
     private UserInforMapper userInforMapper;

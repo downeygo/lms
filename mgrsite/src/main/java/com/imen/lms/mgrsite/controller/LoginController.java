@@ -45,9 +45,9 @@ public class LoginController {
         return "main";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/index2")
     public String index() {
-        return "index";
+        return "index2";
     }
 
 }

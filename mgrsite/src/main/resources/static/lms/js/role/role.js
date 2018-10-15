@@ -30,19 +30,23 @@ $(function () {
     //删除
     $(".delete-btn").click(function () {
         var id = $(this).parent().parent().children(":first-child").val();
-        if(id){
-            $.ajax({
-                url:'/role/'+id,
-                type:'delete',
-                success:function(data){
-                    if(data.success){
-                        window.location.reload();
-                    }else{
-                        $.messager.popup(data.msg);
-                    }
+        bootbox.confirm("你确定要删除吗？", function (yes) {
+            if (yes) {
+                if (id) {
+                    $.ajax({
+                        url: '/role/' + id,
+                        type: 'delete',
+                        success: function (data) {
+                            if (data.success) {
+                                window.location.reload();
+                            } else {
+                                $.messager.popup(data.msg);
+                            }
+                        }
+                    });
                 }
-            });
-        }
+            }
+        });
     });
 
     //保存

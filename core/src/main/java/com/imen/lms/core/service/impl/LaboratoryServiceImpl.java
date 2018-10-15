@@ -2,6 +2,7 @@ package com.imen.lms.core.service.impl;
 
 import com.imen.lms.core.domain.Laboratory;
 import com.imen.lms.core.mapper.LaboratoryMapper;
+import com.imen.lms.core.page.LaboratoryQuery;
 import com.imen.lms.core.service.ILaboratoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,11 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class LaboratoryServiceImpl implements ILaboratoryService{
+public class LaboratoryServiceImpl implements ILaboratoryService {
 
     @Autowired
     private LaboratoryMapper laboratoryMapper;
+
     @Override
     public List<Laboratory> selectAll() {
         return laboratoryMapper.selectAll();

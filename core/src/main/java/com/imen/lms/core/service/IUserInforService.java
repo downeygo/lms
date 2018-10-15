@@ -2,6 +2,7 @@ package com.imen.lms.core.service;
 
 import com.imen.lms.core.domain.LoginInfor;
 import com.imen.lms.core.domain.UserInfor;
+import com.imen.lms.core.page.UserInforQuery;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @data 2018/10/4 14:15
  * @description
  */
-public interface IUserInforService {
+public interface IUserInforService extends IBaseService<UserInfor,UserInforQuery>{
     /**
      * 查询所有用户
      * @return 用户列表

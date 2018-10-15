@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user:${user}"  th:class="${user.loginInfor.state}==9?'table-danger':''">
+        <tr th:each="user:${page.listResult}" th:class="${user.loginInfor.state}==9?'table-danger':''">
             <input type="hidden" th:value="${user.id}"/>
             <td th:text="${user.loginInfor.username}"></td>
             <td th:text="${user.realName}"></td>
@@ -48,6 +48,10 @@
         </tbody>
     </table>
 </div>
+<!--分页按钮-->
+<div th:include="page" name="page" data-url="/user"></div>
+
+
 <!--添加-->
 <div class="modal fade" id="input" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -64,19 +68,19 @@
                     <div class="form-group">
                         <label>用户名:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="username" name="username" />
+                            <input type="text" class="form-control" id="username" name="username"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>密码:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="password" name="password" />
+                            <input type="text" class="form-control" id="password" name="password"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>确认密码:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="conPassword" name="conPassword" />
+                            <input type="text" class="form-control" id="conPassword" name="conPassword"/>
                         </div>
                     </div>
                     <div class="form-group">

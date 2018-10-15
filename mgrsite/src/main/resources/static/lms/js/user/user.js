@@ -5,6 +5,7 @@ $(function () {
         $("#username").prop("readonly", false);
         $("input[name='id']").val(null);
         $("#addFrom").clearForm();
+        $("#select").children().remove();
         //加载下拉框框
         displaySelect();
         $("#input").modal("show");
@@ -47,6 +48,7 @@ $(function () {
 
     //编辑
     $(".edit-btn").click(function () {
+        $("#select").children().remove();
         //清空表单数据
         $("#addFrom").clearForm();
         //获取要编辑的id
@@ -111,7 +113,6 @@ function displaySelect(ids) {
                             }
                         }
                     }
-                    console.debug(data)
                     html += '<option value="' + data.objList[i].id + '" ' + selected + '>' + data.objList[i].name + '</option>';
                     selected = "";
                 }

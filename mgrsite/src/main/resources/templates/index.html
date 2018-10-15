@@ -1,22 +1,65 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="UTF-8">
-    <title>index</title>
+    <meta charset="utf-8">
+    <title>实验室管理系统(LMS)</title>
     <div th:include="common"></div>
-
-    <script type="text/javascript" th:src="@{/lms/js/common/bootbox.js}"></script>
-    <script type="text/javascript">
-        console.debug(11);
-        $(function () {
-            bootbox.confirm("1111",function () {
-                
-            });
-            console.debug(22);
-        });
-    </script>
 </head>
 <body>
-index
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">实验室管理系统</a>
+        </div>
+        <div class="col-md-offset-3">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        系统管理 <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a data-url="/user">用户</a></li>
+                        <li class="divider"></li>
+                        <li><a data-url="/role">角色</a></li>
+                        <li class="divider"></li>
+                        <li><a data-url="/permission">权限</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>时间:</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        用户名 <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>个人信息</a></li>
+                        <li class="divider"></li>
+                        <li><a>修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{/logout}">退出</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/logout}">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+    <nav class="col-md-2" style="background-color: #17a2b8;height: 500px">
+
+
+    </nav>
+    <main class="col-md-10">
+        <iframe id="iframe" th:src="@{/index2}" frameborder="no" scrolling="auto" width="100%" height="500"
+                allowtransparency="true"/>
+    </main>
+    <div class="navbar-fixed-bottom">SSSS</div>
+    </div>
+</div>
 </body>
 </html>

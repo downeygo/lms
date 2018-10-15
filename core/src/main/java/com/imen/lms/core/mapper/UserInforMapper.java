@@ -1,6 +1,7 @@
 package com.imen.lms.core.mapper;
 
 import com.imen.lms.core.domain.UserInfor;
+import com.imen.lms.core.page.UserInforQuery;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @description 用户信息mapper类
  */
 @Mapper
-public interface UserInforMapper {
+public interface UserInforMapper extends BaseMapper<UserInfor,UserInforQuery>{
     /**
      * 查询所有用户
      * @return 用户列表

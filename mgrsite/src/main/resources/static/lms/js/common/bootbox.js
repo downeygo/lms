@@ -76,7 +76,7 @@
 
   var defaults = {
     // default language
-    locale: "en",
+    locale: "zh_CN",
     // show backdrop or not. Default to static so user has to interact with dialog
     backdrop: "static",
     // animate the modal in/out

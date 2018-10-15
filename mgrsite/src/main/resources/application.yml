@@ -8,3 +8,4 @@ spring:
     include: core
   thymeleaf:
     cache: false
+
