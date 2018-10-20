@@ -14,11 +14,11 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PageResult<T> {
+public class PageResult {
     private Integer currentPage;//当前页
     private Integer pageSize;//每页条数
     private Integer totalCount;//总条数
-    private List<T> listResult;//结果集
+    private List listResult;//结果集
     private int totalPage;//总页数
     private int firstPage;//第一页
     private int prevPage;//上一页

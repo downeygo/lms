@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class UserInforServiceImpl extends BaseServiceImpl<UserInfor,UserInforQuery> implements IUserInforService {
+public class UserInforServiceImpl extends BaseServiceImpl<UserInforQuery> implements IUserInforService {
 
     @Autowired
     private UserInforMapper userInforMapper;

@@ -12,7 +12,7 @@ import java.util.List;
  * @description
  */
 @Mapper
-public interface RoleMapper {
+public interface RoleMapper extends BaseMapper<Role>{
     /**
      * 查询角色信息
      * @return 角色信息列表

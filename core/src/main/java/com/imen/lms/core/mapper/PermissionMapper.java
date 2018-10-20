@@ -11,7 +11,7 @@ import java.util.List;
  * @description
  */
 @Mapper
-public interface PermissionMapper {
+public interface PermissionMapper extends BaseMapper<Permission>{
     /**
      * 查询所有权限
      * @return 权限集合

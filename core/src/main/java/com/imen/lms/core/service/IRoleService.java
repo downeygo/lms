@@ -9,7 +9,7 @@ import java.util.List;
  * @data 2018/10/6 14:47
  * @description
  */
-public interface IRoleService {
+public interface IRoleService extends IBaseService<Role>{
     /**
      * 获取角色列表
      * @return 角色列表

@@ -12,7 +12,7 @@ import java.util.List;
  * @description 用户信息mapper类
  */
 @Mapper
-public interface UserInforMapper extends BaseMapper<UserInfor,UserInforQuery>{
+public interface UserInforMapper extends BaseMapper<UserInforQuery>{
     /**
      * 查询所有用户
      * @return 用户列表

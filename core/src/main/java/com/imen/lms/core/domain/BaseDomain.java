@@ -1,5 +1,6 @@
 package com.imen.lms.core.domain;
 
+import com.imen.lms.core.page.BaseQuery;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +14,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ToString
-public class BaseDomain {
+public class BaseDomain extends BaseQuery{
     private Integer id;//id
 }

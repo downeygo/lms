@@ -11,7 +11,7 @@
 <body>
 <div class="table-responsive">
     <shiro:hasPermission name="user:add">
-        <button type="button" class="btn btn-success add-btn">添加</button>
+        <button type="button" class="btn btn-success btn-sm add-btn">添加</button>
     </shiro:hasPermission>
     <table class="table table-striped table-sm">
         <thead>
@@ -38,10 +38,10 @@
             <td th:text="${user.loginInfor.userType==1?'管理员':'用户'}"></td>
             <td>
                 <shiro:hasPermission name="user:get">
-                    <button type="button" class="btn btn-primary edit-btn">编辑</button>
+                    <button type="button" class="btn btn-primary btn-sm edit-btn">编辑</button>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="user:delete">
-                    <button type="button" class="btn btn-danger delete-btn">删除</button>
+                    <button type="button" class="btn btn-danger btn-sm delete-btn">删除</button>
                 </shiro:hasPermission>
             </td>
         </tr>
@@ -93,8 +93,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary save-btn">保存</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-sm save-btn">保存</button>
             </div>
         </div>
     </div>

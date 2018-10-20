@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class PermissionServiceImpl implements IPermissionService{
+public class PermissionServiceImpl extends BaseServiceImpl<Permission> implements IPermissionService {
 
     @Autowired
     private PermissionMapper permissionMapper;

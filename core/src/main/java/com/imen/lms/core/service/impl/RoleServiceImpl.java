@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class RoleServiceImpl implements IRoleService {
+public class RoleServiceImpl extends BaseServiceImpl<Role> implements IRoleService {
     @Autowired
     private RoleMapper roleMapper;
     @Autowired
@@ -65,7 +65,7 @@ public class RoleServiceImpl implements IRoleService {
         //不存在则更新
         if (r == null) {
             flag = true;
-        //存在:如果是同一个角色，也可以更新
+            //存在:如果是同一个角色，也可以更新
         } else if (r.getId().equals(role.getId())) {
             flag = true;
         } else {

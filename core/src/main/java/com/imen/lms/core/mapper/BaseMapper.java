@@ -13,18 +13,20 @@ import java.util.List;
  * @description
  */
 @Mapper
-public interface BaseMapper<T1,T2> {
+public interface BaseMapper<T> {
     /**
      * 根据您查询条件查询总数
+     *
      * @param queryObj
      * @return
      */
-    Integer queryCount(T2 queryObj);
+    Integer queryCount(T queryObj);
 
     /**
      * 根据查询条件查询结果
+     *
      * @param queryObj
      * @return
      */
-    List<T1> query(T2 queryObj);
+    List<T> query(T queryObj);
 }

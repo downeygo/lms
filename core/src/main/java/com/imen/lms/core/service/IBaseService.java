@@ -8,12 +8,12 @@ import com.imen.lms.core.page.PageResult;
  * @data 2018/10/13 13:49
  * @description
  */
-public interface IBaseService<T1, T2> {
+public interface IBaseService<T> {
     /**
      * 分页+高级查询
      *
      * @param queryObj
      * @return
      */
-    PageResult<T1> query(T2 queryObj, Integer currentPage, Integer pageSize);
+    PageResult query(T queryObj, Integer currentPage, Integer pageSize);
 }

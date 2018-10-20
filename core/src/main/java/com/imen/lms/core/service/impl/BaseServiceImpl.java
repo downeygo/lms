@@ -18,10 +18,10 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class BaseServiceImpl<T1, T2> implements IBaseService<T1, T2> {
+public class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Autowired
-    private BaseMapper<T1, T2> baseMapper;
+    private BaseMapper<T> baseMapper;
     @Autowired
     private BaseQuery bq;
 
@@ -32,13 +32,18 @@ public class BaseServiceImpl<T1, T2> implements IBaseService<T1, T2> {
      * @return
      */
     @Override
-    public PageResult<T1> query(T2 queryObj, Integer currentPage, Integer pageSize) {
+    public PageResult query(T queryObj, Integer currentPage, Integer pageSize) {
+        if (currentPage == null) {
+            currentPage = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 10;
+        }
         Integer count = baseMapper.queryCount(queryObj);
         if (count <= 0) {
-            return new PageResult<T1>(0, Collections.EMPTY_LIST, 1, pageSize);
+            return new PageResult(0, Collections.EMPTY_LIST, 1, pageSize);
         }
-        List<T1> listResult = baseMapper.query(queryObj);
-        System.out.println(bq.getCurrentPage()+"**"+bq.getPageSize());
-        return new PageResult<T1>(count, listResult, currentPage, pageSize);
+        List<T> listResult = baseMapper.query(queryObj);
+        return new PageResult(count, listResult, currentPage, pageSize);
     }
 }

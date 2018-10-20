@@ -9,7 +9,7 @@ import java.util.List;
  * @data 2018/10/6 11:33
  * @description
  */
-public interface IPermissionService {
+public interface IPermissionService extends IBaseService<Permission>{
     /**
      * 查询用户对应的权限表达式
      * @param username 用户名

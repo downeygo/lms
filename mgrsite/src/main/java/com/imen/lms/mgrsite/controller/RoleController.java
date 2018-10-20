@@ -2,6 +2,7 @@ package com.imen.lms.mgrsite.controller;
 
 import com.imen.lms.core.domain.Permission;
 import com.imen.lms.core.domain.Role;
+import com.imen.lms.core.page.PageResult;
 import com.imen.lms.core.service.IPermissionService;
 import com.imen.lms.core.service.IRoleService;
 import com.imen.lms.core.util.JSONResult;
@@ -32,9 +33,13 @@ public class RoleController {
     @GetMapping("/role")
     @RequiresPermissions("role:list")
     @PermissionName("角色列表")
-    public String list(Model m) {
-        List<Role> roles = roleService.selectAll();
-        m.addAttribute("role", roles);
+    public String list(Model m, Role r) {
+        try {
+            PageResult page = roleService.query(r, r.getCurrentPage(), r.getPageSize());
+            m.addAttribute("page", page);
+        } catch (Exception e) {
+            return "error/500";
+        }
         return "role/list";
     }
 

@@ -13,6 +13,6 @@ mybatis:
   type-aliases-package: com.imen.lms.core.domain
   config-location: classpath:mybatis.cfg.xml
 
-#logging:
-#  level:
-#     com.imen.lms.core: debug
+logging:
+  level:
+     com.imen.lms.core: debug

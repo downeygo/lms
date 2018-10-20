@@ -6,6 +6,18 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="resource" property="resource" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <sql id="base_condition">
+        <where>
+            <if test="name!=null">
+                name=#{name}
+            </if>
+            <if test="resource!=null">
+                resource=#{resource}
+            </if>
+        </where>
+    </sql>
+
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT id, name, resource
         FROM permission
@@ -62,4 +74,26 @@
         DELETE FROM role_permission
         WHERE r_id=#{id}
     </delete>
+
+    <select id="queryCount" resultType="int">
+        SELECT
+          COUNT(1)
+        FROM
+          permission
+        <include refid="base_condition"/>
+    </select>
+
+    <select id="query" resultMap="BaseResultMap">
+        SELECT
+          id,
+          name,
+          resource
+        FROM
+          permission
+        <include refid="base_condition"/>
+        ORDER BY id ASC
+        <if test="start!=null">
+            LIMIT #{start}, #{pageSize}
+        </if>
+    </select>
 </mapper>

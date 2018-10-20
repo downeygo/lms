@@ -27,10 +27,10 @@ $(function () {
         });
 
         if (id) {
-            url = '/user?' + $("#addFrom").serialize()+'&ids='+ids;
+            url = '/user?' + $("#addFrom").serialize() + '&ids=' + ids;
             type = 'put';
         } else {
-            url = '/user?' + $("#addFrom").serialize()+'&ids='+ids;
+            url = '/user?' + $("#addFrom").serialize() + '&ids=' + ids;
             type = 'post';
         }
         $.ajax({
@@ -80,15 +80,19 @@ $(function () {
     //删除
     $(".delete-btn").click(function () {
         var id = $(this).parent().parent().children(":first-child").val();
-        $.ajax({
-            url: '/user/' + id,
-            type: 'delete',
-            success: function (data) {
-                if (data.success) {
-                    window.location.reload();
-                } else {
-                    $.messager.popup(data.msg);
-                }
+        bootbox.confirm("你确定要删除吗？", function (yes) {
+            if (yes) {
+                $.ajax({
+                    url: '/user/' + id,
+                    type: 'delete',
+                    success: function (data) {
+                        if (data.success) {
+                            window.location.reload();
+                        } else {
+                            $.messager.popup(data.msg);
+                        }
+                    }
+                });
             }
         });
     });

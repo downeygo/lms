@@ -11,7 +11,7 @@ import java.util.List;
  * @data 2018/10/4 14:15
  * @description
  */
-public interface IUserInforService extends IBaseService<UserInfor,UserInforQuery>{
+public interface IUserInforService extends IBaseService<UserInforQuery>{
     /**
      * 查询所有用户
      * @return 用户列表
