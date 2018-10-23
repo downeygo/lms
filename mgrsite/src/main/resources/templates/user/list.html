@@ -34,7 +34,9 @@
             <th>邮箱</th>
             <th>生日</th>
             <th>用户类型</th>
+            <shiro:hasAnyPermissions name="user:get,user:delete">
             <th>操作</th>
+            </shiro:hasAnyPermissions>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +50,7 @@
             <td th:text="${#dates.format(user.birth,'yyyy-MM-dd')}"></td>
             <td th:text="${user.loginInfor.userType==1?'管理员':'用户'}"></td>
             <td>
-                <shiro:hasPermission name="user:get">
+                <shiro:hasPermission name="user:update">
                     <button type="button" class="btn btn-primary btn-sm edit-btn">编辑</button>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="user:delete">

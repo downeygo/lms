@@ -39,7 +39,6 @@ public class UserInforController {
     @PermissionName("用户列表")
     public String list(Model m, UserInforQuery uq) {
         try {
-            uq.setPageSize(2);
             PageResult page = userInforService.query(uq,uq.getCurrentPage(),uq.getPageSize());
             m.addAttribute("page", page);
             m.addAttribute("user", uq);

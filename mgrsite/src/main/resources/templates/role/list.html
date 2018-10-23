@@ -24,7 +24,9 @@
         <tr>
             <th>名称</th>
             <th>编码</th>
+            <shiro:hasAnyPermissions name="role:get,role:delete">
             <th>操作</th>
+            </shiro:hasAnyPermissions>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +35,7 @@
             <td th:text="${role.name}"></td>
             <td th:text="${role.code}"></td>
             <td>
-                <shiro:hasPermission name="role:get">
+                <shiro:hasPermission name="role:update">
                     <button type="button" class="btn btn-primary btn-sm edit-btn">编辑</button>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="role:delete">
