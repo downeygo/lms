@@ -37,6 +37,7 @@ public class RoleController {
         try {
             PageResult page = roleService.query(r, r.getCurrentPage(), r.getPageSize());
             m.addAttribute("page", page);
+            m.addAttribute("r", r);
         } catch (Exception e) {
             return "error/500";
         }

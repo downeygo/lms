@@ -18,22 +18,25 @@
     <sql id="base_condition">
         <where>
             <if test="username!=null">
-                l.username=#{username}
+                l.username LIKE CONCAT('%', #{username}, '%')
             </if>
             <if test="realName!=null">
-                u.realName=#{realName}
+                u.realName LIKE CONCAT('%' #{realName}, '%')
             </if>
             <if test="gender!=null">
-                u.gender=#{gender}
+                u.gender = #{gender}
             </if>
             <if test="phoneNumber!=null">
-                u.phoneNumber=#{phoneNumber}
+                u.phoneNumber LIKE CONCAT('%' #{phoneNumber}, '%')
             </if>
             <if test="email!=null">
-                u.email=#{email}
+                u.email LIKE CONCAT('%' #{email}, '%')
             </if>
             <if test="birth!=null">
                 u.birth=#{birth}
+            </if>
+            <if test="userType!=null">
+                l.userType=#{userType}
             </if>
         </where>
     </sql>

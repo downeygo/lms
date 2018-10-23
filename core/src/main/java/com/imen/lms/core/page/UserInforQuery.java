@@ -21,4 +21,5 @@ public class UserInforQuery extends BaseQuery {
     private String phoneNumber;//电话号码
     private String email;//电子邮件
     private Date birth;//出生年月
+    private Integer userType;//用户类型
 }

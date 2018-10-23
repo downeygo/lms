@@ -10,9 +10,20 @@
 </head>
 <body>
 <div class="table-responsive">
-    <shiro:hasPermission name="user:add">
-        <button type="button" class="btn btn-success btn-sm add-btn">添加</button>
-    </shiro:hasPermission>
+    <div class="form-inline" name="user">
+        <shiro:hasPermission name="user:add">
+            <button type="button" class="btn btn-success btn-sm add-btn">添加</button>
+        </shiro:hasPermission>
+        <label>&nbsp用户名&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="username" th:value="${user.username}">
+        <label>&nbsp姓名&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="realName" th:value="${user.realName}">
+        <label>&nbsp电话号码&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="phoneNumber" th:value="${user.phoneNumber}">
+        <label>&nbsp邮箱&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="email" th:value="${user.email}">
+        <button type="button" class="btn btn-dark btn-sm query-btn">查询</button>
+    </div>
     <table class="table table-striped table-sm">
         <thead>
         <tr>

@@ -10,10 +10,10 @@
     <sql id="base_condition">
         <where>
             <if test="name!=null">
-                name=#{name}
+                name LIKE CONCAT('%', #{name}, '%')
             </if>
             <if test="code!=null">
-                code=#{code}
+                code LIKE CONCAT('%', #{code}, '%')
             </if>
         </where>
     </sql>

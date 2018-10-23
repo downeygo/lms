@@ -96,6 +96,7 @@ $(function () {
             }
         });
     });
+
 });
 
 function displaySelect(ids) {

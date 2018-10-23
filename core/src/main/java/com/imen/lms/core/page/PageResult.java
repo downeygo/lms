@@ -25,19 +25,22 @@ public class PageResult {
     private int nextPage;//下一页
     private int lastPage;//最后一页
 
-    public PageResult(int totalCount, List listResult,int currentPage,int pageSize) {
+    public PageResult(int totalCount, List listResult, int currentPage, int pageSize) {
         this.totalCount = totalCount;
         this.listResult = listResult;
-        this.currentPage=currentPage;
-        this.pageSize=pageSize;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
         this.init();
     }
 
-    private void init(){
-        this.firstPage=1;
-        this.totalPage=this.totalCount%this.pageSize==0?this.totalCount/this.pageSize:this.totalCount/this.pageSize+1;
-        this.prevPage=this.currentPage<2?1:this.currentPage-1;
-        this.nextPage=this.currentPage+1>this.totalPage?this.totalPage:this.currentPage+1;
-        this.lastPage=this.totalPage;
+    private void init() {
+        this.firstPage = 1;
+        this.totalPage = this.totalCount % this.pageSize == 0 ? this.totalCount / this.pageSize : this.totalCount / this.pageSize + 1;
+        if (totalPage <= 0){
+            totalPage = 1;
+        }
+        this.prevPage = this.currentPage < 2 ? 1 : this.currentPage - 1;
+        this.nextPage = this.currentPage + 1 > this.totalPage ? this.totalPage : this.currentPage + 1;
+        this.lastPage = this.totalPage;
     }
 }

@@ -39,9 +39,10 @@ public class UserInforController {
     @PermissionName("用户列表")
     public String list(Model m, UserInforQuery uq) {
         try {
+            uq.setPageSize(2);
             PageResult page = userInforService.query(uq,uq.getCurrentPage(),uq.getPageSize());
             m.addAttribute("page", page);
-            System.out.println(page.getLastPage());
+            m.addAttribute("user", uq);
             return "user/list";
         } catch (Exception e) {
             return "error/500";

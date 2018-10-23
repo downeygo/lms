@@ -9,9 +9,16 @@
 </head>
 <body>
 <div class="table-responsive">
-    <shiro:hasPermission name="permission:reload">
-        <button type="button" class="btn btn-success btn-sm reload-btn">加载</button>
-    </shiro:hasPermission>
+    <div class="form-inline" name="permission">
+        <shiro:hasPermission name="permission:reload">
+            <button type="button" class="btn btn-success btn-sm reload-btn">加载</button>
+        </shiro:hasPermission>
+        <div class="col-sm-5"></div>
+        <label>&nbsp权限名称&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="name" th:value="${p.name}">
+        <button type="button" class="btn btn-dark btn-sm query-btn">查询</button>
+    </div>
+</div>
     <table class="table table-striped table-sm">
         <thead>
         <tr>

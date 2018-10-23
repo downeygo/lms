@@ -34,10 +34,16 @@
                 var currentPage = $(this).val();
                 var url = $("div[name=page]").data("url");
 
+                //获取查询框中的数据
+                var queryDate = getQueryParams(".query-btn");
+
+                //提交数据
                 if (currentPage && url) {
                     url = url + '?currentPage=' + currentPage;
-                    //获取父窗口分iframe
-                    window.parent.$("#iframe").prop("src", url);
+                    if(queryDate){
+                        url += queryDate;
+                    }
+                    reqURL(url);
                 }
             }
         });

@@ -28,7 +28,9 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     /**
      * 分页+高级查询
      *
-     * @param queryObj
+     * @param queryObj 查询条件
+     * @param currentPage 当前页
+     * @param pageSize 每页条数
      * @return
      */
     @Override

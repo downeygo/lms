@@ -41,6 +41,7 @@ public class PermissionController {
         try {
             PageResult page = permissionService.query(p, p.getCurrentPage(), p.getPageSize());
             m.addAttribute("page", page);
+            m.addAttribute("p", p);
         } catch (Exception e) {
             return "error/500";
         }
