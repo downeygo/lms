@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+    <div th:include="common"></div>
+
+    <script type="text/javascript" th:src="@{/lms/js/user/changePWD.js}"></script>
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="py-3 text-center">
+        <h3>修改密码</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>用户名:</label>
+                    <lable class="col-md-10">[[${username}]]</lable>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="mb-3">
+                    <label>旧密码</label>
+                    <input type="text" class="form-control" name="oldPWD">
+                </div>
+                <div class="mb-3">
+                    <label>新密码</label>
+                    <input type="password" class="form-control" name="newPWD">
+                </div>
+                <div class="mb-3">
+                    <label>确认密码</label>
+                    <input type="password" class="form-control" name="confirmPWD">
+                </div>
+                <button class="btn btn-primary btn-block change-btn">确认修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

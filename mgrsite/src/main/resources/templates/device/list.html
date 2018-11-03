@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>设备信息</title>
+    <div th:include="common"></div>
+    <script type="text/javascript" th:src="@{/lms/js/device/device.js}"></script>
+</head>
+<body>
+<div class="mb-2"></div>
+<div class="table-responsive">
+    <div class="form-inline" name="device">
+        <shiro:hasPermission name="device:add">
+            <button type="button" class="btn btn-success btn-sm add-btn">添加</button>
+        </shiro:hasPermission>
+        <div class="col-sm-1"></div>
+        <label>&nbsp名称&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="name" th:value="${d.name}">
+        <label>&nbsp类型&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="type" th:value="${d.type}">
+        <label>&nbsp品牌&nbsp</label>
+        <input type="text" class="form-control col-sm-2" name="brand" th:value="${d.brand}">
+        <button type="button" class="btn btn-dark btn-sm query-btn">查询</button>
+    </div>
+</div>
+<div class="mb-3"></div>
+<table class="table table-striped table-sm">
+    <thead>
+    <tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>品牌</th>
+        <th>价格</th>
+        <shiro:hasAnyPermissions name="device:get,device:delete">
+        <th>操作</th>
+        </shiro:hasAnyPermissions>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d:${page.listResult}">
+        <input type="hidden" th:value="${d.id}"/>
+        <td th:text="${d.name}"></td>
+        <td th:text="${d.type}"></td>
+        <td th:text="${d.brand}"></td>
+        <td th:text="${d.price}"></td>
+        <td>
+            <shiro:hasPermission name="device:get">
+                <button type="button" class="btn btn-primary btn-sm edit-btn">编辑</button>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="device:delete">
+                <button type="button" class="btn btn-danger btn-sm delete-btn">删除</button>
+            </shiro:hasPermission>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div th:include="page" name="page" data-url="/device"></div>
+<!--添加-->
+<div class="modal fade" id="input" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">添加设备</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="addFrom">
+                    <input type="hidden" name="id"/>
+                    <div class="form-group">
+                        <label>名称:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>类型:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="type"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>品牌:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="brand"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>价格:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="price"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-sm save-btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
