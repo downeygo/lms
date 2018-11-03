@@ -15,6 +15,18 @@
         </association>
     </resultMap>
 
+    <sql id="base_column">
+        u.login_id,
+        u.realName,
+        u.gender,
+        u.phoneNumber,
+        u.email,
+        u.birth,
+        l.username,
+        l.userType,
+        l.state
+    </sql>
+
     <sql id="base_condition">
         <where>
             <if test="username!=null">
@@ -71,16 +83,7 @@
     </delete>
 
     <select id="get" resultMap="BaseResultMap">
-        SELECT
-	      u.login_id,
-	      u.realName,
-	      u.gender,
-	      u.phoneNumber,
-	      u.email,
-	      u.birth,
-	      l.username,
-	      l.userType,
-	      l.state
+        SELECT <include refid="base_column"/>
         FROM
 	      userInfor u
 	    INNER JOIN logininfor l ON u.login_id = l.id
@@ -98,18 +101,9 @@
     </select>
 
     <select id="query" resultMap="BaseResultMap">
-        SELECT
-        u.login_id,
-        u.realName,
-        u.gender,
-        u.phoneNumber,
-        u.email,
-        u.birth,
-        l.username,
-        l.userType,
-        l.state
+        SELECT <include refid="base_column"/>
         FROM
-        userInfor u
+          userInfor u
         INNER JOIN logininfor l ON u.login_id = l.id
         <include refid="base_condition"/>
         ORDER BY u.login_id ASC
@@ -117,4 +111,35 @@
             LIMIT #{start}, #{pageSize}
         </if>
     </select>
+
+    <select id="selectByUsernameAndUserType" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM
+          userInfor u
+        INNER JOIN logininfor l ON u.login_id = l.id
+        WHERE l.username = #{username}
+    </select>
+
+    <update id="updateOne" parameterType="com.imen.lms.core.domain.UserInfor">
+        UPDATE userinfor
+        <set>
+            <if test="realName!=null">
+                realName = #{realName},
+            </if>
+            <if test="gender!=null">
+                gender = #{gender},
+            </if>
+            <if test="phoneNumber!=null">
+                phoneNumber = #{phoneNumber},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+            <if test="birth!=null">
+                birth = #{birth},
+            </if>
+        </set>
+        WHERE
+          login_id = #{id}
+    </update>
 </mapper>

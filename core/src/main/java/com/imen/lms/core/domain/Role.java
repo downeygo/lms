@@ -14,6 +14,6 @@ import java.util.List;
 @Getter@Setter@ToString
 public class Role extends BaseDomain{
     private String name;//名称
-    private String code;//编码
-    private List<Permission> permissions;
+    private String code;//编码s
+    private List<Permission> permissions;//拥有的权限
 }

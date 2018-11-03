@@ -91,7 +91,7 @@
         FROM
           permission
         <include refid="base_condition"/>
-        ORDER BY id ASC
+        ORDER BY name ASC
         <if test="start!=null">
             LIMIT #{start}, #{pageSize}
         </if>

@@ -11,10 +11,5 @@ import java.util.List;
  * @description
  */
 @Mapper
-public interface LaboratoryMapper {
-    /**
-     * 查询实验室信息
-     * @return 实验室信息结合
-     */
-    List<Laboratory> selectAll();
+public interface LaboratoryMapper extends BaseMapper<Laboratory>{
 }

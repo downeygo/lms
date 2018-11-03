@@ -1,0 +1,66 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>个人信息</title>
+    <div th:include="common"></div>
+
+    <script type="text/javascript" th:src="@{/lms/js/user/personal.js}"></script>
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="py-3 text-center">
+        <h3>用户个人信息</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>用户名</label>
+                    <lable class="col-md-10">[[${user.loginInfor.username}]]</lable>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>姓名</label>
+                        <input type="text" class="form-control" name="realName" th:value="${user.realName}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>性别</label>
+                        <div class="col-sm-4">
+                            <select class="selectpicker" name="gender">
+                                <option th:value="0" th:selected="${user.gender==0}">男</option>
+                                <option th:value="1" th:selected="${user.gender==0}">女</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="mb-3">
+                    <label>电话号码</label>
+                    <input type="text" class="form-control" name="phoneNumber" th:value="${user.phoneNumber}">
+                </div>
+                <div class="mb-3">
+                    <label>邮箱</label>
+                    <input type="email" class="form-control" name="email" th:value="${user.email}" placeholder="example@example.com">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>出生日期</label>
+                <input type="text" class="form-control calendar" name="birth" th:value="${#dates.format(user.birth,'yyyy-MM-dd')}">
+            </div>
+            <div class="mb-3 text-center">
+                <button class="btn btn-primary btn-block save-btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

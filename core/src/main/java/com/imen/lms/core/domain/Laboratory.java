@@ -19,7 +19,7 @@ public class Laboratory extends BaseDomain{
     private String code;//编码
     private Integer type;//类型
     private String location;//位置
-    private Integer establisher;//创办人
+    private UserInfor establisher;//创办人
     private Integer size;//可容纳人数
     private String openTime;//开放时间
     private String closeTime;//结束时间

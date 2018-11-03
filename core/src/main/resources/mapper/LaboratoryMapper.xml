@@ -7,15 +7,76 @@
         <result column="code" property="code" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="BIGINT"/>
         <result column="location" property="location" jdbcType="VARCHAR"/>
-        <result column="establisher_id" property="establisher" jdbcType="BIGINT"/>
         <result column="size" property="size" jdbcType="BIGINT"/>
         <result column="openTime" property="openTime" jdbcType="VARCHAR"/>
         <result column="closeTime" property="closeTime" jdbcType="VARCHAR"/>
         <result column="establishTime" property="establishTime" jdbcType="VARCHAR"/>
+        <association property="establisher" javaType="com.imen.lms.core.domain.UserInfor">
+            <result column="login_id" property="id"/>
+            <result column="realName" property="realName"/>
+        </association>
     </resultMap>
-    <select id="selectAll" resultMap="BaseResultMap">
-        SELECT id, name, code, type, location, establisher_id, size, openTime, closeTime, establishTime
-        FROM laboratory
+
+    <sql id="base_column">
+        l.id, l.name, l.code, l.type, l.location, l.size, l.openTime,
+        l.closeTime, l.establishTime, u.login_id, u.realName
+    </sql>
+
+    <sql id="base_condition">
+        <where>
+            <if test="name!=null">
+                l.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="code!=null">
+                l.code LIKE CONCAT('%' #{code}, '%')
+            </if>
+            <if test="type!=null">
+                l.type = #{type}
+            </if>
+            <if test="location!=null">
+                l.location LIKE CONCAT('%' #{location}, '%')
+            </if>
+            <if test="size!=null">
+                l.size LIKE CONCAT('%' #{size}, '%')
+            </if>
+            <if test="openTime!=null">
+                l.openTime = #{openTime}
+            </if>
+            <if test="closeTime!=null">
+                l.closeTime = #{closeTime}
+            </if>
+            <if test="establishTime!=null">
+                l.establishTime = #{establishTime}
+            </if>
+            <if test="establisher!=null">
+                u.realName LIKE CONCAT('%' #{establisher.realNmae}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM laboratory l
+        INNER JOIN userinfor u ON l.establisher_id = u.login_id
+    </select>
+
+    <select id="queryCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM laboratory l
+        INNER JOIN userinfor u ON l.establisher_id = u.login_id
+        <include refid="base_condition"/>
+    </select>
+
+    <select id="query" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM laboratory l
+        INNER JOIN userinfor u ON l.establisher_id = u.login_id
+        <include refid="base_condition"/>
+        ORDER BY l.id ASC
+        <if test="start!=null">
+            LIMIT #{start}, #{pageSize}
+        </if>
     </select>
 
 </mapper>

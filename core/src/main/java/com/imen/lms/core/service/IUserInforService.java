@@ -45,4 +45,17 @@ public interface IUserInforService extends IBaseService<UserInforQuery>{
      * @return
      */
     UserInfor getUserRole(Integer id);
+
+    /**
+     * 根据用户名查询用户
+     * @param username 用户名
+     * @return 用户对象
+     */
+    UserInfor selectByUsernameAndUserType(String username);
+
+    /**
+     * 更新用户
+     * @param userInfor
+     */
+    void updateOne(UserInfor userInfor);
 }

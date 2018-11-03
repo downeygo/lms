@@ -57,6 +57,22 @@
         WHERE id=#{id}
     </update>
 
+    <update id="updateOne">
+        UPDATE loginInfor
+        <set>
+            <if test="password!=null and password!=''">
+                password = #{password},
+            </if>
+            <if test="userType!=null and userType!=''">
+                userType = #{userType},
+            </if>
+            <if test="state!=null and state!=''">
+                state = #{state},
+            </if>
+        </set>
+        WHERE username = #{username}
+    </update>
+
     <delete id="delete">
         DELETE FROM loginInfor
         WHERE id=#{id}

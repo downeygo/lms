@@ -32,7 +32,6 @@ public class LoginController {
         JSONResult jsonResult = null;
         try {
             loginInforService.login(username, password);
-            m.addAttribute("currentUser", username);
             jsonResult = new JSONResult(true, "登录成功");
         } catch (Exception e) {
             jsonResult = new JSONResult("用户名或密码错误");
@@ -45,9 +44,9 @@ public class LoginController {
         return "main";
     }
 
-    @GetMapping("/index2")
+    @GetMapping("/index")
     public String index() {
-        return "index2";
+        return "index";
     }
 
 }

@@ -3,6 +3,7 @@ package com.imen.lms.core.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -21,6 +22,7 @@ public class UserInfor extends BaseDomain {
     private Integer gender;//0:男 1：女
     private String phoneNumber;//电话号码
     private String email;//电子邮件
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birth;//出生年月
     private LoginInfor loginInfor;//登录信息
     private List<Role> roles;//用户拥有的角色

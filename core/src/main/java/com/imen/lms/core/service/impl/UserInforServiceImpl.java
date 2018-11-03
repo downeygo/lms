@@ -44,7 +44,7 @@ public class UserInforServiceImpl extends BaseServiceImpl<UserInforQuery> implem
             //添加登录信息
             loginInfor = new LoginInfor();
             loginInfor.setUsername(username);
-            loginInfor.setPassword(MD5Util.passwordEncrypt(password,username));
+            loginInfor.setPassword(MD5Util.passwordEncrypt(password, username));
             loginInfor.setState(LoginInfor.LOGIN_STATE_INITIALIZE);
             loginInfor.setUserType(LoginInfor.USER_TYPE_ADMIN);
             loginInforMapper.add(loginInfor);
@@ -64,9 +64,11 @@ public class UserInforServiceImpl extends BaseServiceImpl<UserInforQuery> implem
 
     @Override
     public void update(LoginInfor loginInfor, Integer[] roleID) {
-        //更新用户信息
-        loginInfor.setPassword(MD5Util.passwordEncrypt(loginInfor.getPassword(),loginInfor.getUsername()));
-        loginInforMapper.update(loginInfor);
+        if (loginInfor.getPassword() != null) {
+            //更新用户信息
+            loginInfor.setPassword(MD5Util.passwordEncrypt(loginInfor.getPassword(), loginInfor.getUsername()));
+            loginInforMapper.update(loginInfor);
+        }
         //删除用户角色中间表
         roleMapper.deleteRoleByUser(loginInfor.getId());
         //重新添加角色
@@ -87,5 +89,15 @@ public class UserInforServiceImpl extends BaseServiceImpl<UserInforQuery> implem
         List<Role> roles = roleMapper.getRoleByUser(id);
         userInfor.setRoles(roles);
         return userInfor;
+    }
+
+    @Override
+    public UserInfor selectByUsernameAndUserType(String username) {
+        return userInforMapper.selectByUsernameAndUserType(username);
+    }
+
+    @Override
+    public void updateOne(UserInfor userInfor) {
+        userInforMapper.updateOne(userInfor);
     }
 }

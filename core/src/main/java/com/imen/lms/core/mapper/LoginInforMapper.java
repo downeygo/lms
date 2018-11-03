@@ -11,7 +11,7 @@ import java.util.List;
  * @description 登录信息mapper类
  */
 @Mapper
-public interface LoginInforMapper {
+public interface LoginInforMapper extends BaseMapper<LoginInfor>{
     /**
      * 查询所有登录信息
      * @return  登录信息集合

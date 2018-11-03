@@ -25,12 +25,38 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     @Autowired
     private BaseQuery bq;
 
+
+    @Override
+    public int deleteOne(Integer id) {
+        return baseMapper.deleteOne(id);
+    }
+
+    @Override
+    public List<T> listAll() {
+        return baseMapper.listAll();
+    }
+
+    @Override
+    public int updateOne(T obj) {
+        return baseMapper.updateOne(obj);
+    }
+
+    @Override
+    public int insertOne(T obj) {
+        return baseMapper.insertOne(obj);
+    }
+
+    @Override
+    public T getByID(Integer id) {
+        return baseMapper.getByID(id);
+    }
+
     /**
      * 分页+高级查询
      *
-     * @param queryObj 查询条件
+     * @param queryObj    查询条件
      * @param currentPage 当前页
-     * @param pageSize 每页条数
+     * @param pageSize    每页条数
      * @return
      */
     @Override

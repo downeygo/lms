@@ -15,19 +15,21 @@
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
             <a class="nav-link">
-               时间: [[${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd')}]]
+                时间: [[${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd')}]]
             </a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown">
-                用户名：<shiro:principal/>
+                用户名：
+                <shiro:principal/>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item">个人信息</a>
-                <a class="dropdown-item">修改密码</a>
-                <a class="dropdown-item">退出</a>
+                <a class="dropdown-item" data-url="/user/personal">个人信息</a>
+                <a class="dropdown-item" data-url="/user/changePWD">修改密码</a>
+                <a class="dropdown-item" th:href="@{/logout}">退出</a>
             </div>
         </li>
+        <div class="col-sm-1"></div>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/logout}">注销</a>
         </li>
@@ -37,39 +39,47 @@
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-md-block bg-light">
-                <ul id="leftMenu" class="nav flex-column ">
-                    <shiro:hasPermission name="laboratory:list">
+            <ul id="leftMenu" class="nav flex-column ">
+                <shiro:hasPermission name="laboratory:list">
                     <li class="nav-item">
                         <a class="nav-link text-primary" data-url="/laboratory">
                             实验室
                         </a>
                     </li>
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="user:list">
+                </shiro:hasPermission>
+                <shiro:hasPermission name="device:list">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" data-url="/device">
+                            设备
+                        </a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="user:list">
                     <li class="nav-item">
                         <a class="nav-link text-primary" data-url="/user">
                             用户
                         </a>
                     </li>
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="role:list">
+                </shiro:hasPermission>
+                <shiro:hasPermission name="role:list">
                     <li class="nav-item">
                         <a class="nav-link text-primary" data-url="/role">
                             角色
                         </a>
                     </li>
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="permission:list">
+                </shiro:hasPermission>
+                <shiro:hasPermission name="permission:list">
                     <li class="nav-item">
                         <a class="nav-link text-primary" data-url="/permission">
                             权限
                         </a>
                     </li>
-                    </shiro:hasPermission>
-                </ul>
+                </shiro:hasPermission>
+            </ul>
         </nav>
         <main class="col-md-10 ml-sm-auto col-lg-10">
-            <iframe id="iframe" th:src="@{/index}" frameborder="no" scrolling="auto" width="100%" height="600" allowtransparency="true"/>
+            <iframe id="iframe" th:src="@{/index}" frameborder="no" scrolling="auto" width="100%" height="570"
+                    allowtransparency="true"/>
         </main>
     </div>
 </div>

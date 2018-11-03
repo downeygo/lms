@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -118,6 +117,21 @@ public class RoleController {
             jsonResult = new JSONResult(true, "删除成功");
         } catch (Exception e) {
             jsonResult = new JSONResult("删除失败");
+        }
+        return jsonResult;
+    }
+
+    @GetMapping("/roleT/{id}")
+    @RequiresPermissions("role:list")
+    @PermissionName("角色列表")
+    @ResponseBody
+    public JSONResult list2(@PathVariable("id") Integer id) {
+        JSONResult<Role> jsonResult = null;
+        try {
+            Role role = roleService.getRolePermission(id);
+            jsonResult = new JSONResult(true, role);
+        } catch (Exception e) {
+            jsonResult = new JSONResult(e.getMessage());
         }
         return jsonResult;
     }

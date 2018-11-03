@@ -7,11 +7,13 @@ import com.imen.lms.core.domain.UserInfor;
 import com.imen.lms.core.page.BaseQuery;
 import com.imen.lms.core.page.PageResult;
 import com.imen.lms.core.page.UserInforQuery;
+import com.imen.lms.core.service.ILoginInforService;
 import com.imen.lms.core.service.IRoleService;
 import com.imen.lms.core.service.IUserInforService;
 import com.imen.lms.core.util.JSONResult;
 import com.imen.lms.core.util.PermissionName;
 import com.imen.lms.core.util.StringUtil;
+import org.apache.catalina.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,8 @@ public class UserInforController {
     private IUserInforService userInforService;
     @Autowired
     private IRoleService roleService;
+    @Autowired
+    private ILoginInforService loginInforService;
 
 
     @GetMapping("/user")
@@ -39,7 +43,7 @@ public class UserInforController {
     @PermissionName("用户列表")
     public String list(Model m, UserInforQuery uq) {
         try {
-            PageResult page = userInforService.query(uq,uq.getCurrentPage(),uq.getPageSize());
+            PageResult page = userInforService.query(uq, uq.getCurrentPage(), uq.getPageSize());
             m.addAttribute("page", page);
             m.addAttribute("user", uq);
             return "user/list";
@@ -100,7 +104,7 @@ public class UserInforController {
     }
 
     @GetMapping("/user_getRole")
-    @RequiresPermissions("use:getRole")
+    @RequiresPermissions("user:getRole")
     @PermissionName("用户获取角色(加载下拉框)")
     @ResponseBody
     public JSONResult getRole() {
@@ -129,4 +133,56 @@ public class UserInforController {
         return jsonResult;
     }
 
+    @GetMapping("/user/personal")
+    public String personal(Model m) {
+        try {
+            String username = loginInforService.getCurrentUsername();
+            UserInfor user = userInforService.selectByUsernameAndUserType(username);
+            m.addAttribute("user", user);
+        } catch (Exception e) {
+            return "error/500";
+        }
+        return "user/personal";
+    }
+
+    @PutMapping("/user/personal")
+    @ResponseBody
+    public JSONResult updatePersonal(UserInfor userInfor) {
+        JSONResult jsonResult = null;
+        try {
+            String username = loginInforService.getCurrentUsername();
+            Integer id = userInforService.selectByUsernameAndUserType(username).getId();
+            userInfor.setId(id);
+            userInforService.updateOne(userInfor);
+            jsonResult = new JSONResult(true, "修改成功");
+        } catch (Exception e) {
+            jsonResult = new JSONResult("修改失败");
+        }
+        return jsonResult;
+    }
+
+    @GetMapping("/user/changePWD")
+    public String toChangePWDPage(Model m) {
+        try {
+            String username = loginInforService.getCurrentUsername();
+            m.addAttribute("username", username);
+        } catch (Exception e) {
+            return "error/500";
+        }
+        return "user/changePWD";
+    }
+
+
+    @PutMapping("/user/changePWD")
+    @ResponseBody
+    public JSONResult changePWD(String oldPWD, String newPWD) {
+        JSONResult jsonResult = null;
+        try {
+            loginInforService.changPWD(oldPWD, newPWD);
+            jsonResult = new JSONResult(true, "修改成功");
+        } catch (Exception e) {
+            jsonResult = new JSONResult(e.getMessage());
+        }
+        return jsonResult;
+    }
 }

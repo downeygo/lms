@@ -9,57 +9,58 @@
     <script type="text/javascript" th:src="@{/lms/js/user/user.js}"></script>
 </head>
 <body>
-<div class="table-responsive">
-    <div class="form-inline" name="user">
-        <shiro:hasPermission name="user:add">
-            <button type="button" class="btn btn-success btn-sm add-btn">添加</button>
-        </shiro:hasPermission>
-        <label>&nbsp用户名&nbsp</label>
-        <input type="text" class="form-control col-sm-2" name="username" th:value="${user.username}">
-        <label>&nbsp姓名&nbsp</label>
-        <input type="text" class="form-control col-sm-2" name="realName" th:value="${user.realName}">
-        <label>&nbsp电话号码&nbsp</label>
-        <input type="text" class="form-control col-sm-2" name="phoneNumber" th:value="${user.phoneNumber}">
-        <label>&nbsp邮箱&nbsp</label>
-        <input type="text" class="form-control col-sm-2" name="email" th:value="${user.email}">
-        <button type="button" class="btn btn-dark btn-sm query-btn">查询</button>
-    </div>
-    <table class="table table-striped table-sm">
-        <thead>
-        <tr>
-            <th>用户名</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>电话号码</th>
-            <th>邮箱</th>
-            <th>生日</th>
-            <th>用户类型</th>
-            <shiro:hasAnyPermissions name="user:get,user:delete">
+<div class="mb-2"></div>
+<div class="form-inline" name="user">
+    <shiro:hasPermission name="user:add">
+        <button type="button" class="btn btn-success btn-sm add-btn">添加</button>
+    </shiro:hasPermission>
+    <label>&nbsp用户名&nbsp</label>
+    <input type="text" class="form-control col-sm-2" name="username" th:value="${user.username}">
+    <label>&nbsp姓名&nbsp</label>
+    <input type="text" class="form-control col-sm-2" name="realName" th:value="${user.realName}">
+    <label>&nbsp电话号码&nbsp</label>
+    <input type="text" class="form-control col-sm-2" name="phoneNumber" th:value="${user.phoneNumber}">
+    <label>&nbsp邮箱&nbsp</label>
+    <input type="text" class="form-control col-sm-2" name="email" th:value="${user.email}">
+    <button type="button" class="btn btn-dark btn-sm query-btn">查询</button>
+</div>
+<div class="mb-3"></div>
+<table class="table table-striped table-sm">
+    <thead>
+    <tr>
+        <th>用户名</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>电话号码</th>
+        <th>邮箱</th>
+        <th>生日</th>
+        <th>用户类型</th>
+        <shiro:hasAnyPermissions name="user:get,user:delete">
             <th>操作</th>
-            </shiro:hasAnyPermissions>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user:${page.listResult}" th:class="${user.loginInfor.state}==9?'table-danger':''">
-            <input type="hidden" th:value="${user.id}"/>
-            <td th:text="${user.loginInfor.username}"></td>
-            <td th:text="${user.realName}"></td>
-            <td th:text="${user.gender}==0?'男':'女'"></td>
-            <td th:text="${user.phoneNumber}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${#dates.format(user.birth,'yyyy-MM-dd')}"></td>
-            <td th:text="${user.loginInfor.userType==1?'管理员':'用户'}"></td>
-            <td>
-                <shiro:hasPermission name="user:update">
-                    <button type="button" class="btn btn-primary btn-sm edit-btn">编辑</button>
-                </shiro:hasPermission>
-                <shiro:hasPermission name="user:delete">
-                    <button type="button" class="btn btn-danger btn-sm delete-btn">删除</button>
-                </shiro:hasPermission>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        </shiro:hasAnyPermissions>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user:${page.listResult}">
+        <input type="hidden" th:value="${user.id}"/>
+        <td id="username" th:text="${user.loginInfor.username}"></td>
+        <td th:text="${user.realName}"></td>
+        <td th:text="${user.gender}==0?'男':'女'"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${#dates.format(user.birth,'yyyy-MM-dd')}"></td>
+        <td th:text="${user.loginInfor.userType==1?'管理员':'用户'}"></td>
+        <td>
+            <shiro:hasPermission name="user:update">
+                <button type="button" class="btn btn-primary btn-sm edit-btn">编辑</button>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="user:delete">
+                <button type="button" class="btn btn-danger btn-sm delete-btn">删除</button>
+            </shiro:hasPermission>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </div>
 <!--分页按钮-->
 <div th:include="page" name="page" data-url="/user"></div>
@@ -81,19 +82,19 @@
                     <div class="form-group">
                         <label>用户名:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="username" name="username"/>
+                            <input type="text" class="form-control" name="username"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>密码:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="password" name="password"/>
+                            <input type="text" class="form-control" name="password"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>确认密码:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="conPassword" name="conPassword"/>
+                            <input type="text" class="form-control" name="conPassword"/>
                         </div>
                     </div>
                     <div class="form-group">
