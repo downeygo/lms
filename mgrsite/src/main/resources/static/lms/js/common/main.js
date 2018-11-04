@@ -21,6 +21,11 @@ $(function () {
         reqURL(url);
     });
 
+    //前台
+    $("a[name='go']").click(function(){
+        $("#iframe").prop("src", "http://localhost/hello");
+    });
+
 });
 
 //获取查询条件
@@ -172,11 +177,15 @@ function deleteOne(button, url) {
     if (!button) {
         return;
     }
-    id = $(button).parent().parent().children(":first-child").val();
+    var id = $(button).parent().parent().children(":first-child").val();
+    var text = $(button).text();
+    if(!text){
+        text = "删除";
+    }
     if (!id || !url) {
         return;
     }
-    bootbox.confirm("你确定要删除吗？", function (yes) {
+    bootbox.confirm('你确定'+ text +'要吗？', function (yes) {
         if (yes) {
             $.ajax({
                 url: url + '/' + id,

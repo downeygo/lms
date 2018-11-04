@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>实验室信息</title>
+    <div th:include="common"></div>
+    <script type="text/javascript" th:src="@{/lms/js/laboratory/laboratory.js}"></script>
 </head>
 <body>
-<div th:include="common"></div>
 <div class="mb-2"></div>
-<shiro:hasPermission name="permission:add">
-    <button type="button" class="btn btn-sm btn-primary">添加</button>
-</shiro:hasPermission>
+<div class="form-inline" name="laboratory">
+    <shiro:hasPermission name="laboratory:add">
+    <button type="button" class="btn btn-sm btn-success add-btn">添加</button>
+    </shiro:hasPermission>
+</div>
 <div class="mb-3"></div>
 <table class="table table-striped table-sm">
     <thead>
     <tr>
         <th>名称</th>
         <th>编码</th>
-        <th>类型</th>
         <th>位置</th>
         <th>创办人</th>
         <th>可容纳人数</th>
@@ -28,22 +30,72 @@
     </thead>
     <tbody>
     <tr th:each="lab:${page.listResult}">
+        <input type="hidden" th:value="${lab.id}"/>
         <td th:text="${lab.name}"></td>
         <td th:text="${lab.code}"></td>
-        <td th:text="${lab.type}"></td>
         <td th:text="${lab.location}"></td>
-        <td th:text="${lab.establisher.realName}"></td>
+        <td th:text="${lab.establisher}"></td>
         <td th:text="${lab.size}"></td>
         <td>[[${lab.openTime}]] 至 [[${lab.closeTime}]]</td>
         <td th:text="${#dates.format(lab.establishTime,'yyyy-MM-dd')}"></td>
         <td>
             <button type="button" class="btn btn-sm btn-primary">查看详情</button>
-            <button type="button" class="btn btn-sm btn-danger">关闭</button>
+            <shiro:hasPermission name="laboratory:closeOrOpen">
+            <button type="button" class="btn btn-sm btn-success status-btn" th:if="${lab.status eq 1}">开启</button>
+            <button type="button" class="btn btn-sm btn-danger status-btn" th:if="${lab.status eq 2 or lab.status eq 0}">关闭</button>
+            </shiro:hasPermission>
         </td>
     </tr>
     </tbody>
 </table>
 </div>
 <div th:include="page" name="page" data-url="/laboratory"></div>
+
+<!--添加-->
+<div class="modal fade" id="input" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">添加实验室</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="addFrom">
+                    <input type="hidden" name="id"/>
+                    <div class="form-group">
+                        <label>名称:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>编码:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="code"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>可容纳人数:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="size"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>位置:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="location"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-sm save-btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

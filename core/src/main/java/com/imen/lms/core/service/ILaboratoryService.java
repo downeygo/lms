@@ -11,4 +11,19 @@ import java.util.List;
  * @description
  */
 public interface ILaboratoryService extends IBaseService<Laboratory> {
+    /**
+     * 添加实验室
+     * @param laboratory
+     * @return
+     */
+    int insertOneCus(Laboratory laboratory);
+
+    /**
+     * 关闭或启用实验室
+     * @param id
+     * @return
+     */
+    int closeOrOpen(Integer id);
+
+
 }

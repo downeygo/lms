@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imen.lms.core.mapper.DeviceMapper">
+    <resultMap id="BaseResultMap" type="com.imen.lms.core.domain.Device">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="brand" property="brand" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="base_column">
+        id, name,type, brand, price
+    </sql>
+
+    <sql id="base_condition">
+        <where>
+            <if test="name!=null">
+                name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="type!=null">
+                type LIKE CONCAT('%', #{type}, '%')
+            </if>
+            <if test="brand!=null">
+                brand LIKE CONCAT('%', #{brand}, '%')
+            </if>
+            <if test="price!=null">
+                price = #{price}
+            </if>
+        </where>
+    </sql>
+
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM device
+    </select>
+
+    <insert id="insertOne">
+        INSERT INTO device(
+          id,
+          name,
+          type,
+          brand,
+          price
+        )VALUES (
+          #{id},
+          #{name},
+          #{type},
+          #{brand},
+          #{price}
+        )
+    </insert>
+
+    <select id="getByID" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM device
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateOne">
+        UPDATE device
+        <set>
+            <if test="name!=null">
+              name=#{name},
+            </if>
+            <if test="type!=null">
+                type = #{type},
+            </if>
+            <if test="brand!=null">
+                brand = #{brand},
+            </if>
+            <if test="price!=null">
+                price = #{price}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteOne">
+        DELETE FROM device
+        WHERE id = #{id}
+    </delete>
+
+    <select id="queryCount" resultType="int">
+        SELECT
+          COUNT(1)
+        FROM
+          device
+        <include refid="base_condition"/>
+    </select>
+
+    <select id="query" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM
+        device
+        <include refid="base_condition"/>
+        ORDER BY id ASC
+        <if test="start!=null">
+            LIMIT #{start}, #{pageSize}
+        </if>
+    </select>
+</mapper>

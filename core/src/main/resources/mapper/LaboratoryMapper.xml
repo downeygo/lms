@@ -5,21 +5,18 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="code" property="code" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="BIGINT"/>
         <result column="location" property="location" jdbcType="VARCHAR"/>
         <result column="size" property="size" jdbcType="BIGINT"/>
         <result column="openTime" property="openTime" jdbcType="VARCHAR"/>
         <result column="closeTime" property="closeTime" jdbcType="VARCHAR"/>
         <result column="establishTime" property="establishTime" jdbcType="VARCHAR"/>
-        <association property="establisher" javaType="com.imen.lms.core.domain.UserInfor">
-            <result column="login_id" property="id"/>
-            <result column="realName" property="realName"/>
-        </association>
+        <result column="establisher" property="establisher" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="base_column">
-        l.id, l.name, l.code, l.type, l.location, l.size, l.openTime,
-        l.closeTime, l.establishTime, u.login_id, u.realName
+        l.id, l.name, l.code, l.status, l.location, l.size, l.openTime,
+        l.closeTime, l.establishTime, l.establisher
     </sql>
 
     <sql id="base_condition">
@@ -30,8 +27,8 @@
             <if test="code!=null">
                 l.code LIKE CONCAT('%' #{code}, '%')
             </if>
-            <if test="type!=null">
-                l.type = #{type}
+            <if test="status!=null">
+                l.status = #{status}
             </if>
             <if test="location!=null">
                 l.location LIKE CONCAT('%' #{location}, '%')
@@ -49,7 +46,7 @@
                 l.establishTime = #{establishTime}
             </if>
             <if test="establisher!=null">
-                u.realName LIKE CONCAT('%' #{establisher.realNmae}, '%')
+                l.establisher LIKE CONCAT('%' #{establisher}, '%')
             </if>
         </where>
     </sql>
@@ -57,21 +54,84 @@
     <select id="listAll" resultMap="BaseResultMap">
         SELECT <include refid="base_column"/>
         FROM laboratory l
-        INNER JOIN userinfor u ON l.establisher_id = u.login_id
     </select>
+
+    <select id="getByID" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM laboratory l
+        WHERE
+          id = #{id}
+    </select>
+
+    <insert id="insertOne">
+        INSERT INTO laboratory(
+          name,
+          code,
+          status,
+          location,
+          size,
+          openTime,
+          closeTime,
+          establishTime,
+          establisher
+        )VALUES (
+          #{name},
+          #{code},
+          #{status},
+          #{location},
+          #{size},
+          #{openTime},
+          #{closeTime},
+          #{establishTime},
+          #{establisher}
+        )
+    </insert>
+
+    <update id="updateOne">
+        UPDATE laboratory
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="code!=null">
+                code = #{code},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+            <if test="location!=null">
+                location = #{location},
+            </if>
+            <if test="size!=null">
+                size = #{size},
+            </if>
+            <if test="openTime!=null">
+                openTime = #{openTime},
+            </if>
+            <if test="closeTime!=null">
+                closeTime = #{closeTime},
+            </if>
+            <if test="establishTime!=null">
+                establishTime = #{establishTime},
+            </if>
+            <if test="establisher!=null">
+                establisher = #{establisher},
+            </if>
+        </set>
+        WHERE
+          id = #{id}
+    </update>
 
     <select id="queryCount" resultType="int">
         SELECT
         COUNT(1)
         FROM laboratory l
-        INNER JOIN userinfor u ON l.establisher_id = u.login_id
         <include refid="base_condition"/>
     </select>
 
     <select id="query" resultMap="BaseResultMap">
         SELECT <include refid="base_column"/>
         FROM laboratory l
-        INNER JOIN userinfor u ON l.establisher_id = u.login_id
         <include refid="base_condition"/>
         ORDER BY l.id ASC
         <if test="start!=null">
