@@ -39,7 +39,7 @@
         <td>[[${lab.openTime}]] 至 [[${lab.closeTime}]]</td>
         <td th:text="${#dates.format(lab.establishTime,'yyyy-MM-dd')}"></td>
         <td>
-            <button type="button" class="btn btn-sm btn-primary">查看详情</button>
+            <button type="button" class="btn btn-sm btn-primary detail-btn">查看详情</button>
             <shiro:hasPermission name="laboratory:closeOrOpen">
             <button type="button" class="btn btn-sm btn-success status-btn" th:if="${lab.status eq 1}">开启</button>
             <button type="button" class="btn btn-sm btn-danger status-btn" th:if="${lab.status eq 2 or lab.status eq 0}">关闭</button>

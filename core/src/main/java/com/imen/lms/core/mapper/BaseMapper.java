@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @autor LIGANG
@@ -65,4 +66,6 @@ public interface BaseMapper<T> {
      * @return
      */
     List<T> query(T queryObj);
-}
+
+
+ }

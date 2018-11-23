@@ -11,12 +11,23 @@
         <result column="openTime" property="openTime" jdbcType="VARCHAR"/>
         <result column="closeTime" property="closeTime" jdbcType="VARCHAR"/>
         <result column="establishTime" property="establishTime" jdbcType="VARCHAR"/>
+        <result column="establisher_id" property="establisherID" jdbcType="BIGINT"/>
         <result column="establisher" property="establisher" jdbcType="VARCHAR"/>
+        <result column="announcement" property="announcement" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="MemberMap" type="Map">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="lab_id" property="id" jdbcType="VARCHAR"/>
+        <result column="lab_name" property="labName" jdbcType="VARCHAR"/>
+        <result column="member_id" property="memberID" jdbcType="BIGINT"/>
+        <result column="member_name" property="memberName" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="base_column">
         l.id, l.name, l.code, l.status, l.location, l.size, l.openTime,
-        l.closeTime, l.establishTime, l.establisher
+        l.closeTime, l.establishTime,l.establisher_id, l.establisher, l.announcement
     </sql>
 
     <sql id="base_condition">
@@ -56,13 +67,6 @@
         FROM laboratory l
     </select>
 
-    <select id="getByID" resultMap="BaseResultMap">
-        SELECT <include refid="base_column"/>
-        FROM laboratory l
-        WHERE
-          id = #{id}
-    </select>
-
     <insert id="insertOne">
         INSERT INTO laboratory(
           name,
@@ -73,7 +77,9 @@
           openTime,
           closeTime,
           establishTime,
-          establisher
+          establisher_id,
+          establisher,
+          announcement
         )VALUES (
           #{name},
           #{code},
@@ -83,7 +89,9 @@
           #{openTime},
           #{closeTime},
           #{establishTime},
-          #{establisher}
+          #{establisherID},
+          #{establisher},
+          #{announcement}
         )
     </insert>
 
@@ -114,13 +122,25 @@
             <if test="establishTime!=null">
                 establishTime = #{establishTime},
             </if>
+            <if test="establisherID!=null">
+                establisher_id = #{establisherID},
+            </if>
             <if test="establisher!=null">
                 establisher = #{establisher},
+            </if>
+            <if test="announcement!=null">
+                announcement = #{announcement},
             </if>
         </set>
         WHERE
           id = #{id}
     </update>
+
+    <select id="getByID" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM laboratory l
+        WHERE id = #{id}
+    </select>
 
     <select id="queryCount" resultType="int">
         SELECT
@@ -139,4 +159,27 @@
         </if>
     </select>
 
+    <select id="getMember" resultMap="MemberMap">
+      SELECT l.id, l.lab_id, l.lab_name, l.member_id,
+          l.member_name, c.description AS type
+      FROM labxuser l
+      LEFT JOIN codelkup c ON c.code = l.type AND c.listname = 'LABUSERTYPE'
+      WHERE lab_id = #{id}
+    </select>
+
+    <insert id="addMember" parameterType="map">
+        INSERT INTO labxuser(
+          lab_id,
+          lab_name,
+          member_id,
+          member_name,
+          type
+        )VALUES (
+          #{id},
+          #{labName},
+          #{memberID},
+          #{memberName},
+          #{type}
+        )
+    </insert>
 </mapper>

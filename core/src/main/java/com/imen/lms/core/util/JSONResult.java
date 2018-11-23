@@ -14,9 +14,17 @@ import java.util.List;
 @Getter@Setter
 public class JSONResult<T> {
     private boolean success;
+
+    public JSONResult(boolean success, List<T> objList, List<T> objList2) {
+        this.success = success;
+        this.objList = objList;
+        this.objList2 = objList2;
+    }
+
     private String msg;
     private String msg2;
     private List<T> objList;
+    private List<T> objList2;
     private T obj;
 
     public JSONResult(String msg){

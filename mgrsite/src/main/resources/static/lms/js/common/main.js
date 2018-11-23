@@ -257,3 +257,12 @@ function displaySelect(selectURL, ids) {
         }
     });
 }
+
+/**
+ * 获取ID
+ * @param button
+ * @returns {*|jQuery}
+ */
+function getID(button) {
+    return $(button).parent().parent().children(":first-child").val();
+}

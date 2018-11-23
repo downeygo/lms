@@ -100,4 +100,9 @@ public class UserInforServiceImpl extends BaseServiceImpl<UserInforQuery> implem
     public void updateOne(UserInfor userInfor) {
         userInforMapper.updateOne(userInfor);
     }
+
+    @Override
+    public UserInfor get(Integer id) {
+        return userInforMapper.get(id);
+    }
 }

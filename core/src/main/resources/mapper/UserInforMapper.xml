@@ -142,4 +142,13 @@
         WHERE
           login_id = #{id}
     </update>
+
+    <select id="getByID" resultMap="BaseResultMap">
+        SELECT <include refid="base_column"/>
+        FROM
+        userInfor u
+        INNER JOIN logininfor l ON u.login_id = l.id
+        WHERE
+        l.id = #{id}
+    </select>
 </mapper>

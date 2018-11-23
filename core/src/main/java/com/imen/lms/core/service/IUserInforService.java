@@ -58,4 +58,11 @@ public interface IUserInforService extends IBaseService<UserInforQuery>{
      * @param userInfor
      */
     void updateOne(UserInfor userInfor);
+
+    /**
+     * 查询
+     * @param id
+     * @return
+     */
+    UserInfor get(Integer id);
 }

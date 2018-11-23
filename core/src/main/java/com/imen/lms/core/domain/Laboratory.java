@@ -21,9 +21,11 @@ public class Laboratory extends BaseDomain{
     private String code;//编码
     private Integer status;//状态
     private String location;//位置
-    private String establisher;//创办人
+    private Integer establisherID;//负责人ID
+    private String establisher;//负责人
     private Integer size;//可容纳人数
     private String openTime;//开放时间
     private String closeTime;//结束时间
     private Date establishTime;//成立时间
+    private String announcement;//公告
 }

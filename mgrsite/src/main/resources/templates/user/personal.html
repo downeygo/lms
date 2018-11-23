@@ -32,8 +32,8 @@
                         <label>性别</label>
                         <div class="col-sm-4">
                             <select class="selectpicker" name="gender">
-                                <option th:value="0" th:selected="${user.gender==0}">男</option>
-                                <option th:value="1" th:selected="${user.gender==0}">女</option>
+                                <option th:value="0" th:selected="${user.gender} eq 0">男</option>
+                                <option th:value="1" th:selected="${user.gender} eq 1">女</option>
                             </select>
                         </div>
                     </div>

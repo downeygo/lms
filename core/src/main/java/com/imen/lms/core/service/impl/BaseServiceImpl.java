@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @autor LIGANG
@@ -74,4 +75,5 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
         List<T> listResult = baseMapper.query(queryObj);
         return new PageResult(count, listResult, currentPage, pageSize);
     }
+
 }

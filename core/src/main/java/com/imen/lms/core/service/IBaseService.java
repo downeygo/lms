@@ -3,6 +3,7 @@ package com.imen.lms.core.service;
 import com.imen.lms.core.page.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @autor LIGANG
@@ -55,4 +56,5 @@ public interface IBaseService<T> {
      * @return
      */
     PageResult query(T queryObj, Integer currentPage, Integer pageSize);
+
 }
